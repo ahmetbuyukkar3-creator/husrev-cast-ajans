@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aday paketi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css">
+  <style>
+    .p-ust { position: sticky; top: 0; z-index: 5; background: rgba(12,10,16,.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--cizgi); }
+    .p-ust-ic, .p-kap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .p-ust-ic { display: flex; align-items: center; gap: 12px; height: 64px; }
+    .ajans-logo { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; font-weight: 800; font-size: 13px; color: #140F08; background: var(--vurgu); }
+    .p-ust b { font-size: 16px; }
+    .p-ozet { margin-left: auto; font-size: 13px; color: var(--soluk); }
+    .p-hero { padding: 40px 0 26px; }
+    .p-hero small { color: var(--vurgu); font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; font-size: 12px; }
+    .p-hero h1 { font-family: var(--baslik); font-size: clamp(28px, 4.5vw, 44px); margin: 8px 0 10px; }
+    .p-hero p { color: var(--soluk); margin: 0; max-width: 640px; }
+    .p-rol { margin: 30px 0 10px; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+    .p-rol h2 { font-size: 22px; }
+    .p-rol span { color: var(--soluk); font-size: 14px; }
+    .p-izgara { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; }
+    .p-kart { background: var(--kart); border: 1px solid var(--cizgi); border-radius: 16px; overflow: hidden; transition: border-color .2s, box-shadow .2s, opacity .2s; }
+    .p-kart.begenildi { border-color: var(--altin); box-shadow: 0 0 0 1px var(--altin); }
+    .p-kart.secildi { border-color: var(--yesil); box-shadow: 0 0 0 2px var(--yesil); }
+    .p-kart.elendi { opacity: .45; }
+    .p-kart .foto { cursor: pointer; }
+    .p-bilgi { padding: 12px 14px 4px; }
+    .p-bilgi b { font-size: 16px; }
+    .p-bilgi small { display: block; color: var(--soluk); font-size: 13px; margin: 2px 0 8px; }
+    .p-dugme { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; padding: 10px 14px 14px; }
+    .p-dugme button { padding: 9px 4px; border-radius: 10px; border: 1px solid var(--cizgi); background: var(--kart2); cursor: pointer; font-weight: 600; font-size: 13px; }
+    .p-dugme button:hover { border-color: #463d5a; }
+    .p-dugme button.on[data-d="begenildi"] { background: rgba(217,164,65,.2); border-color: var(--altin); color: var(--altin2); }
+    .p-dugme button.on[data-d="secildi"] { background: rgba(61,220,151,.18); border-color: var(--yesil); color: var(--yesil); }
+    .p-dugme button.on[data-d="elendi"] { background: rgba(255,107,107,.14); border-color: var(--kirmizi); color: var(--kirmizi); }
+    .p-not { margin: 0 14px 14px; }
+    .p-not textarea { width: 100%; min-height: 38px; resize: vertical; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--cizgi); background: var(--zemin2); font-size: 13px; outline: none; }
+    .p-not textarea:focus { border-color: var(--vurgu); }
+    .p-alt { text-align: center; color: var(--soluk); font-size: 13px; padding: 50px 0 40px; }
+    .p-alt a { color: var(--altin2); text-decoration: none; }
+    .olcu { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .olcu div { padding: 10px 12px; border-radius: 10px; background: var(--zemin2); border: 1px solid var(--cizgi); }
+    .olcu small { display: block; color: var(--soluk); font-size: 11px; }
+    @media (max-width: 560px) { .p-ust-ic, .p-kap { padding: 0 16px; } .p-ozet { display: none; } .p-izgara { grid-template-columns: 1fr 1fr; gap: 12px; } .p-dugme { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div id="kok"></div>
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script>
+  (function () {
+    const e = U.esc;
+    const ETIKET = { begenildi: '♥ Beğen', secildi: '✓ Seç', elendi: '✕ Ele' };
+
+    function ciz() {
+      const p = H.proje(location.hash.slice(1));
+      const kok = document.getElementById('kok');
+      if (!p || !p.paket) { kok.innerHTML = `<div class="p-kap" style="padding:80px 24px;text-align:center"><h1 style="font-family:var(--baslik)">Paket bulunamadı</h1><p style="color:var(--soluk)">Link hatalı ya da paket henüz gönderilmemiş.</p></div>`; return; }
+      const a = H.ajans(p.ajans);
+      document.documentElement.style.setProperty('--vurgu', a.renk);
+      document.title = p.ad + ' — ' + a.ad;
+      if (!p.paket.goruldu) { p.paket.goruldu = Date.now(); H.hareket(`${p.musteri} paketi açtı`, p.id); H.kaydet(); }
+      const tum = p.roller.flatMap(r => r.adaylar || []);
+      const say = k => tum.filter(x => x.durum === k).length;
+      kok.innerHTML = `
+        <header class="p-ust"><div class="p-ust-ic"><span class="ajans-logo">${e(a.kisa)}</span><b>${e(a.ad)}</b>
+          <span class="p-ozet">${tum.length} aday · ${say('begenildi')} beğeni · ${say('secildi')} seçim</span></div></header>
+        <main class="p-kap">
+          <section class="p-hero"><small>${e(p.musteri)} için aday paketi</small><h1>${e(p.ad)}</h1>
+            <p>Çekim ${U.tarih(p.cekim)}. Adayları inceleyip beğenin, seçin ya da eleyin; notlarınız ${e(a.ad)} ekibine anında ulaşır.</p></section>
+          ${p.roller.filter(r => (r.adaylar || []).length).map(r => `
+            <div class="p-rol"><h2>${e(r.ad)}</h2><span>${r.adaylar.length} aday${r.aciklama ? ' · ' + e(r.aciklama) : ''}</span></div>
+            <div class="p-izgara">${r.adaylar.map(x => { const y = H.yetenek(x.yetenek); return `
+              <div class="p-kart ${x.durum}">
+                <div data-detay="${y.id}">${U.foto(y)}</div>
+                <div class="p-bilgi"><b>${e(y.ad)} ${e(y.soyad[0])}.</b><small>${y.yas} yaş · ${y.boy} cm · ${e(y.sehir)}</small>
+                  ${[...y.diller, ...y.beceriler].slice(0, 3).map(s => `<span class="cip">${e(s)}</span>`).join('')}</div>
+                <div class="p-dugme">${Object.keys(ETIKET).map(d => `<button data-r="${r.id}" data-y="${y.id}" data-d="${d}" class="${x.durum === d ? 'on' : ''}">${ETIKET[d]}</button>`).join('')}</div>
+                <div class="p-not"><textarea data-r="${r.id}" data-y="${y.id}" placeholder="Not bırakın (isteğe bağlı)">${e(x.not)}</textarea></div>
+              </div>`; }).join('')}</div>`).join('')}
+          <div class="p-alt">${e(a.ad)} · <a href="index.html">Hüsrev Cast Ajans</a> ile hazırlandı</div>
+        </main>`;
+      const bul = (rid, yid) => p.roller.find(r => r.id === rid).adaylar.find(x => x.yetenek === yid);
+      kok.querySelectorAll('.p-dugme button').forEach(b => b.onclick = () => {
+        const x = bul(b.dataset.r, b.dataset.y), y = H.yetenek(b.dataset.y);
+        x.durum = x.durum === b.dataset.d ? 'aday' : b.dataset.d;
+        if (x.durum !== 'aday') H.hareket(`${p.musteri}: ${y.ad} ${y.soyad} → ${U.durumEtiket[x.durum][0].toLocaleLowerCase('tr')}`, p.id);
+        H.kaydet(); ciz();
+        if (x.durum === 'secildi') U.toast(`${y.ad} seçildi — ${a.ad} bilgilendirildi`);
+      });
+      kok.querySelectorAll('textarea').forEach(t => t.onchange = () => {
+        const x = bul(t.dataset.r, t.dataset.y); x.not = t.value.trim();
+        if (x.not) H.hareket(`${p.musteri} not bıraktı`, p.id);
+        H.kaydet(); U.toast('Notunuz iletildi');
+      });
+      kok.querySelectorAll('[data-detay]').forEach(d => d.onclick = () => {
+        const y = H.yetenek(d.dataset.detay);
+        U.modal(`${e(y.ad)} ${e(y.soyad[0])}.`, `
+          <div style="border-radius:12px;overflow:hidden;max-width:220px">${U.foto(y)}</div>
+          <div class="olcu"><div><small>Yaş</small><b>${y.yas}</b></div><div><small>Boy</small><b>${y.boy} cm</b></div><div><small>Kilo</small><b>${y.kilo} kg</b></div>
+          <div><small>Saç</small><b>${y.sac}</b></div><div><small>Göz</small><b>${y.goz}</b></div><div><small>Deneyim</small><b>${y.deneyim}</b></div></div>
+          <div>${[...y.diller, ...y.beceriler].map(s => `<span class="cip">${e(s)}</span>`).join('') || ''}</div>
+          <p style="margin:0;color:var(--soluk);font-size:13px">İletişim bilgileri ajans tarafından korunur.</p>`);
+      });
+    }
+    H.degisti = () => { if (!document.activeElement || document.activeElement.tagName !== 'TEXTAREA') ciz(); };
+    window.addEventListener('hashchange', ciz);
+    ciz();
+  })();
+  </script>
+</body>
+</html>
