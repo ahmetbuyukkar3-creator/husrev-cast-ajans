@@ -1,78 +1,155 @@
-/* Ortak arayüz yardımcıları */
-(function () {
-  const U = {};
+/* Hüsrev Cast Ajans taslak — kabuk, yönlendirme, modal, bildirim */
+(function (C) {
+  'use strict';
+  var esc = C.esc, icon = C.icon;
+  C.state = { secili: [], hedefProje: null, filtre: null, takvimAy: null };
 
-  U.esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-
-  U.logo = (boyut) => `
-    <svg class="logo-isaret" width="${boyut || 34}" height="${boyut || 34}" viewBox="0 0 40 40" aria-hidden="true">
-      <defs><linearGradient id="lg-h" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F3CF7A"/><stop offset="1" stop-color="#C98A2B"/></linearGradient></defs>
-      <path d="M20 2 L37 11 V29 L20 38 L3 29 V11 Z" fill="none" stroke="url(#lg-h)" stroke-width="2"/>
-      <path d="M13 12 V28 M27 12 V28 M13 20 H27" stroke="url(#lg-h)" stroke-width="3.2" stroke-linecap="round"/>
-      <circle cx="20" cy="9" r="1.8" fill="#F3CF7A"/>
-    </svg>`;
-
-  U.marka = () => `<span class="marka">${U.logo()}<span class="marka-yazi"><b>Hüsrev</b> Cast Ajans</span></span>`;
-
-  U.basHarf = y => (y.ad[0] + y.soyad[0]).toLocaleUpperCase('tr');
-
-  U.avatar = (y, cls) => `<span class="avatar ${cls || ''}" style="--a:${y.renk[0]};--b:${y.renk[1]}">${U.basHarf(y)}</span>`;
-
-  // Fotoğraf yerine: renkli arka plan + siluet + baş harfler
-  U.foto = (y) => `
-    <div class="foto" style="--a:${y.renk[0]};--b:${y.renk[1]}">
-      <svg viewBox="0 0 100 120" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
-        <circle cx="50" cy="44" r="20" fill="rgba(0,0,0,.28)"/>
-        <path d="M12 120 C14 88 30 72 50 72 C70 72 86 88 88 120 Z" fill="rgba(0,0,0,.28)"/>
-      </svg>
-      <span class="foto-harf">${U.basHarf(y)}</span>
-    </div>`;
-
-  U.once = t => {
-    const d = Math.round((Date.now() - t) / 60000);
-    if (d < 1) return 'az önce';
-    if (d < 60) return d + ' dk önce';
-    if (d < 1440) return Math.round(d / 60) + ' saat önce';
-    const g = Math.round(d / 1440);
-    return g === 1 ? 'dün' : g + ' gün önce';
+  // ---------- bildirim ----------
+  C.toast = function (msg, tip) {
+    var host = document.getElementById('toasts');
+    var el = document.createElement('div');
+    el.className = 'toast' + (tip === 'err' ? ' toast-err' : '');
+    el.innerHTML = icon(tip === 'err' ? 'info' : 'check', 16) + '<span>' + esc(msg) + '</span>';
+    host.appendChild(el);
+    setTimeout(function () { el.classList.add('out'); }, 2600);
+    setTimeout(function () { el.remove(); }, 3000);
   };
 
-  U.tarih = s => new Date(s).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
-
-  U.toast = (mesaj) => {
-    let k = document.getElementById('toast');
-    if (!k) { k = document.createElement('div'); k.id = 'toast'; document.body.appendChild(k); }
-    const t = document.createElement('div');
-    t.className = 'toast';
-    t.textContent = mesaj;
-    k.appendChild(t);
-    setTimeout(() => t.classList.add('git'), 2600);
-    setTimeout(() => t.remove(), 3000);
+  // ---------- modal ----------
+  C.modal = function (opts) {
+    var wrap = document.createElement('div');
+    wrap.className = 'modal-wrap';
+    wrap.innerHTML = '<div class="modal' + (opts.genis ? ' modal-wide' : '') + '" role="dialog" aria-modal="true">' +
+      '<div class="modal-head"><h3>' + esc(opts.baslik) + '</h3><button class="icon-btn" data-close aria-label="Kapat">' + icon('x') + '</button></div>' +
+      '<div class="modal-body">' + opts.govde + '</div>' +
+      (opts.alt === false ? '' : '<div class="modal-foot"><button class="btn btn-ghost" data-close>Vazgeç</button><button class="btn btn-primary" data-ok>' + esc(opts.tamam || 'Kaydet') + '</button></div>') +
+      '</div>';
+    document.body.appendChild(wrap);
+    var close = function () { wrap.remove(); document.removeEventListener('keydown', onKey); };
+    var onKey = function (e) { if (e.key === 'Escape') close(); };
+    document.addEventListener('keydown', onKey);
+    wrap.addEventListener('mousedown', function (e) { if (e.target === wrap) close(); });
+    wrap.querySelectorAll('[data-close]').forEach(function (b) { b.onclick = close; });
+    var ok = wrap.querySelector('[data-ok]');
+    if (ok) ok.onclick = function () { if (opts.onOk && opts.onOk(wrap.querySelector('.modal-body')) === false) return; close(); };
+    if (opts.onMount) opts.onMount(wrap.querySelector('.modal-body'), close);
+    var first = wrap.querySelector('input,select,textarea'); if (first) first.focus();
+    return close;
   };
 
-  U.modal = (baslik, govde, butonlar) => {
-    U.modalKapat();
-    const m = document.createElement('div');
-    m.className = 'modal-arka';
-    m.innerHTML = `<div class="modal" role="dialog" aria-modal="true">
-      <div class="modal-bas"><h3>${baslik}</h3><button class="ikon-btn" data-kapat aria-label="Kapat">✕</button></div>
-      <div class="modal-govde">${govde}</div>
-      ${butonlar ? `<div class="modal-alt">${butonlar}</div>` : ''}
-    </div>`;
-    m.addEventListener('click', e => { if (e.target === m || e.target.closest('[data-kapat]')) U.modalKapat(); });
-    document.body.appendChild(m);
-    requestAnimationFrame(() => m.classList.add('acik'));
-    return m;
-  };
-  U.modalKapat = () => document.querySelectorAll('.modal-arka').forEach(m => m.remove());
+  // ---------- menü ----------
+  var MENU = [
+    { h: '#/panel', ad: 'Genel Bakış', ic: 'panel' },
+    { h: '#/havuz', ad: 'Yetenek Havuzu', ic: 'users' },
+    { h: '#/basvurular', ad: 'Başvurular', ic: 'inbox', sayac: function () { return C.db.talents.filter(function (t) { return t.durum === 'basvuru'; }).length; } },
+    { h: '#/projeler', ad: 'Projeler', ic: 'folder' },
+    { h: '#/paketler', ad: 'Aday Paketleri', ic: 'box' },
+    { h: '#/takvim', ad: 'Takvim', ic: 'cal' },
+    { h: '#/musteriler', ad: 'Müşteriler', ic: 'building' },
+    { ayrac: 'Ayarlar' },
+    { h: '#/kullanicilar', ad: 'Kullanıcılar', ic: 'shield' },
+    { h: '#/kayit-sorulari', ad: 'Kayıt Soruları', ic: 'list' },
+    { h: '#/taslak-notlari', ad: 'Taslak Notları', ic: 'note' }
+  ];
 
-  U.durumEtiket = {
-    aday: ['Değerlendiriliyor', 'et-gri'],
-    begenildi: ['Beğenildi', 'et-sari'],
-    secildi: ['Seçildi', 'et-yesil'],
-    elendi: ['Elendi', 'et-kirmizi']
+  C.shell = function (aktif, baslik, govde, sag) {
+    var u = C.me(), rol = C.ROLES[u.rol];
+    var nav = MENU.map(function (m) {
+      if (m.ayrac) return '<div class="nav-sep">' + esc(m.ayrac) + '</div>';
+      var n = m.sayac ? m.sayac() : 0;
+      var on = aktif.indexOf(m.h) === 0 ? ' on' : '';
+      return '<a class="nav-item' + on + '" href="' + m.h + '">' + icon(m.ic, 19) + '<span>' + esc(m.ad) + '</span>' + (n ? '<em class="nav-count">' + n + '</em>' : '') + '</a>';
+    }).join('');
+    var initials = u.ad.split(' ').map(function (s) { return s[0]; }).join('').slice(0, 2);
+    return '<div class="app">' +
+      '<aside class="side" id="side">' +
+        '<a class="brand brand-gorsel" href="#/panel" aria-label="Genel bakış"><canvas id="brandCanvas" aria-hidden="true"></canvas></a>' +
+        '<nav class="nav">' + nav + '</nav>' +
+        '<div class="side-foot">' +
+          '<button class="tema-btn" id="temaBtn" type="button">' + icon('spark', 15) + '<span>Koyu tema</span><i class="tb-sw"></i></button>' +
+          '<a class="kayit-link" href="aday/" target="_blank" rel="noopener">' + icon('link', 16) + '<span>Manken aday sitesi</span>' + icon('arrowR', 14) + '</a>' +
+          '<div class="me"><span class="avatar-s">' + esc(initials) + '</span><div><b>' + esc(u.ad) + '</b><small>' + esc(rol.ad) + '</small></div>' +
+          '<button class="icon-btn" id="cikis" title="Çıkış / rol değiştir">' + icon('logout', 17) + '</button></div>' +
+        '</div>' +
+      '</aside>' +
+      '<div class="main">' +
+        '<header class="top"><button class="icon-btn only-m" id="menuBtn" aria-label="Menü">' + icon('menu') + '</button>' +
+          '<h1>' + baslik + '</h1><div class="top-right">' + (sag || '') +
+          (!rol.edit ? '<span class="ro-pill">' + icon('eye', 14) + ' Salt okunur</span>' : '') + '</div></header>' +
+        '<main class="content">' + govde + '</main>' +
+      '</div></div>';
   };
-  U.etiket = d => { const [y, c] = U.durumEtiket[d] || [d, 'et-gri']; return `<span class="etiket ${c}">${y}</span>`; };
+  C.bindShell = function () {
+    var c = document.getElementById('cikis');
+    if (c) c.onclick = function () { C.logout(); location.hash = '#/giris'; };
+    var tb = document.getElementById('temaBtn');
+    if (tb) tb.onclick = function () { C.temaDegistir(); };
+    var m = document.getElementById('menuBtn');
+    if (m) m.onclick = function () { document.getElementById('side').classList.toggle('open'); };
+  };
 
-  window.U = U;
-})();
+  // ---------- tema (K-013) ----------
+  C.tema = function () { return document.documentElement.getAttribute('data-tema') || 'koyu'; };
+  C.temaDegistir = function () {
+    var yeni = C.tema() === 'koyu' ? 'acik' : 'koyu';
+    document.documentElement.setAttribute('data-tema', yeni);
+    try { localStorage.setItem('husrev.tema', yeni); } catch (e) { }
+  };
+
+  // sayıları sıfırdan yukarı saydırır
+  C.saydir = function (kok) {
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    (kok || document).querySelectorAll('[data-say]').forEach(function (el) {
+      var hedef = +el.getAttribute('data-say'), t0 = performance.now();
+      (function f(t) { var p = Math.max(0, Math.min(1, (t - t0) / 900)); el.textContent = Math.round(hedef * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(f); })(t0);
+    });
+  };
+
+  // ---------- yönlendirme ----------
+  C.routes = [];
+  C.route = function (pattern, fn, opts) { C.routes.push({ re: pattern, fn: fn, pub: opts && opts.pub }); };
+  C.go = function (h) { if (location.hash === h) C.render(); else location.hash = h; };
+  C.render = function () {
+    var h = location.hash || '#/panel';
+    var root = document.getElementById('app');
+    for (var i = 0; i < C.routes.length; i++) {
+      var r = C.routes[i], m = h.match(r.re);
+      if (!m) continue;
+      if (!r.pub && !C.me()) { location.hash = '#/giris'; return; }
+      document.body.className = r.pub ? 'pub' : 'in';
+      window.scrollTo(0, 0);
+      r.fn.apply(null, [root].concat(m.slice(1)));
+      return;
+    }
+    location.hash = C.me() ? '#/panel' : '#/giris';
+  };
+
+  // ---------- küçük parçalar ----------
+  C.avatar = function (t, size) {
+    var dot = t.durum === 'aktif' ? '<i class="dot d-' + C.find(C.UYGUNLUK, t.uygunluk).renk + '" title="' + esc(C.find(C.UYGUNLUK, t.uygunluk).ad) + '"></i>' : '';
+    return '<span class="avatar" style="--s:' + (size || 64) + 'px"><img src="' + C.photo(t, 0) + '" alt="">' + dot + '</span>';
+  };
+  C.iletisim = function (t) {
+    if (!C.can('contact')) return '<span class="masked">' + icon('lock', 13) + ' Gizli</span>';
+    return esc(t.c.telefon);
+  };
+  C.bos = function (ic, baslik, alt, aksiyon) {
+    return '<div class="empty">' + icon(ic, 28) + '<b>' + esc(baslik) + '</b>' + (alt ? '<p>' + esc(alt) + '</p>' : '') + (aksiyon || '') + '</div>';
+  };
+  C.editBtn = function (html) { return C.can('edit') ? html : ''; };
+  C.options = function (list, sel, bosEtiket) {
+    return (bosEtiket !== undefined ? '<option value="">' + esc(bosEtiket) + '</option>' : '') + list.map(function (o) {
+      var v = typeof o === 'object' ? o.k : o, a = typeof o === 'object' ? o.ad : o;
+      return '<option value="' + esc(v) + '"' + (String(sel) === String(v) ? ' selected' : '') + '>' + esc(a) + '</option>';
+    }).join('');
+  };
+  C.val = function (root, sel) { var el = root.querySelector(sel); return el ? el.value.trim() : ''; };
+
+  // ---------- panoya kopyala ----------
+  C.copy = function (text) {
+    var done = function () { C.toast('Link kopyalandı'); };
+    if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(text).then(done, function () { fallback(); }); } else fallback();
+    function fallback() { var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); done(); } catch (e) { } ta.remove(); }
+  };
+  C.paketUrl = function (k) { return location.href.split('#')[0] + '#/p/' + k.token; };
+})(window.C);

@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hüsrev Cast Ajans — Manken Başvurusu</title>
+  <meta name="description" content="Hüsrev Cast Ajans manken ve yeni yüz başvurusu. Profilini oluştur, uygun iş geldiğinde seni arayalım.">
+  <meta name="theme-color" content="#000307">
+  <link rel="icon" href="img/ajans-yuz.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="aday.css?v=20260926c">
+</head>
+<body>
+  <!-- açılış -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-mark"><img class="yuz" src="img/ajans-yuz.jpg" alt=""><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="56"/></svg></div>
+    <div class="loader-bar"><i></i></div>
+  </div>
+
+  <div class="bg-fx" aria-hidden="true"><i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i><i class="grid"></i></div>
+  <div class="cursor-glow" id="glow" aria-hidden="true"></div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <header class="nav" id="nav">
+    <a class="nav-logo" href="#/" aria-label="Ana sayfa"><img class="yuz" src="img/ajans-yuz.jpg" alt=""></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#/" data-to="nasil">Nasıl çalışır</a>
+      <a href="#/" data-to="isler">İşler</a>
+      <a href="#/" data-to="rehber">Fotoğraf rehberi</a>
+      <a href="#/" data-to="sss">SSS</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn-line sm" href="#/giris" id="navGiris">Giriş yap</a>
+      <a class="btn-glow sm" href="#/basvur"><span>Başvur</span></a>
+      <button class="burger" id="burger" aria-label="Menü"><i></i><i></i></button>
+    </div>
+  </header>
+
+  <!-- ================= ANA SAYFA ================= -->
+  <main id="home">
+    <section class="hero" id="top">
+      <div class="hero-foto" aria-hidden="true"><canvas id="heroFoto"></canvas></div>
+      <div class="hero-inner">
+        <div class="hero-text">
+          <span class="eyebrow reveal-load" style="--d:.1s"><i class="live"></i> Başvurular açık</span>
+          <h1 class="hero-title">
+            <span class="ln"><span style="--d:.2s">Kameranın</span></span>
+            <span class="ln"><span style="--d:.32s">aradığı yüz</span></span>
+            <span class="ln"><span class="grad" style="--d:.44s">sen olabilirsin.</span></span>
+          </h1>
+          <p class="hero-sub reveal-load" style="--d:.6s">Hüsrev Cast Ajans; reklam, katalog, defile ve dizi projeleri için yeni yüzler arıyor. Profilini bir kez oluştur, sana uygun bir iş geldiğinde seni biz arayalım.</p>
+          <div class="hero-cta reveal-load" style="--d:.72s">
+            <a class="btn-glow" href="#/basvur"><span>Hemen başvur</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="btn-line" href="#/" data-to="nasil">Nasıl çalışır?</a>
+          </div>
+          <ul class="hero-meta reveal-load" style="--d:.86s">
+            <li><b>~8 dk</b><span>başvuru süresi</span></li>
+            <li><b>1 profil</b><span>tüm projeler için</span></li>
+            <li><b>7/24</b><span>bilgilerini güncelle</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="hero-hint reveal-load" style="--d:1.2s">Görsele dokun</div>
+      <a class="scroll-cue" href="#/" data-to="marq" aria-label="Aşağı kaydır"><span></span></a>
+    </section>
+
+    <section class="marq" id="marq" aria-hidden="true">
+      <div class="marq-track"><div class="marq-row">MANKEN <i></i> FOTOMODEL <i></i> DEFİLE <i></i> REKLAM <i></i> KATALOG <i></i> KLİP <i></i> YENİ YÜZ <i></i>&nbsp;</div><div class="marq-row">MANKEN <i></i> FOTOMODEL <i></i> DEFİLE <i></i> REKLAM <i></i> KATALOG <i></i> KLİP <i></i> YENİ YÜZ <i></i>&nbsp;</div></div>
+      <div class="marq-track rev outline"><div class="marq-row">SAHNE <i></i> IŞIK <i></i> KAMERA <i></i> CASTING <i></i> SET <i></i> KAMPANYA <i></i> PODYUM <i></i>&nbsp;</div><div class="marq-row">SAHNE <i></i> IŞIK <i></i> KAMERA <i></i> CASTING <i></i> SET <i></i> KAMPANYA <i></i> PODYUM <i></i>&nbsp;</div></div>
+    </section>
+
+    <!-- Dijital kart gösterisi -->
+    <section class="sec card-sec" id="kart">
+      <div class="wrap two">
+        <div class="sec-text" data-reveal>
+          <span class="eyebrow">Başvurun nasıl görünür?</span>
+          <h2>Başvurun, ajansın ekranında <em>dijital bir karta</em> dönüşür.</h2>
+          <p>Ölçülerin, fotoğrafların, dillerin ve rol için neleri kabul edebileceğin tek bir kartta toplanır. Hüsrev Cast Ajans ekibi bir proje için aday ararken bu kartlarla çalışır.</p>
+          <ul class="checks">
+            <li><i></i>Ölçü ve özelliklerine göre doğru işle eşleşirsin</li>
+            <li><i></i>İletişim bilgilerin müşteriyle paylaşılmaz</li>
+            <li><i></i>Kartını istediğin zaman kendin güncellersin</li>
+          </ul>
+        </div>
+        <div class="comp-stage" data-reveal>
+          <div class="comp" id="comp" data-tilt>
+            <div class="comp-head"><img class="yuz" src="img/ajans-yuz.jpg" alt=""><span>HÜSREV CAST<small>ADAY KARTI</small></span><em class="comp-state" id="compState">İnceleniyor</em></div>
+            <div class="comp-view">
+              <div class="vf"><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i></div>
+              <div class="rec"><i></i>REC <span id="tc">00:00:00</span></div>
+              <svg class="comp-sil" viewBox="0 0 200 260" aria-hidden="true">
+                <defs><linearGradient id="silg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1fd6ec" stop-opacity=".9"/><stop offset="1" stop-color="#0a78c2" stop-opacity=".25"/></linearGradient></defs>
+                <path id="silPath" d="M100 30c-26 0-44 20-44 48 0 20 8 36 18 46l-2 16c-26 6-50 20-58 60v60h172v-60c-8-40-32-54-58-60l-2-16c10-10 18-26 18-46 0-28-18-48-44-48z" fill="url(#silg)"/>
+              </svg>
+              <div class="scan"></div>
+              <div class="ruler"><div class="ticks"></div><div class="mark" id="rulerMark"><span id="boyTxt">178 cm</span></div></div>
+            </div>
+            <div class="comp-name"><b id="compName">Ada K.</b><span id="compMeta">24 · İstanbul · Manken</span></div>
+            <dl class="comp-attrs" id="compAttrs"></dl>
+          </div>
+          <div class="comp-orbit" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nasıl çalışır -->
+    <section class="sec" id="nasil">
+      <div class="wrap">
+        <div class="sec-head" data-reveal>
+          <span class="eyebrow">Nasıl çalışır?</span>
+          <h2>Başvurudan sete <em>dört adım</em>.</h2>
+        </div>
+        <div class="steps" id="steps">
+          <svg class="steps-line" viewBox="0 0 1000 40" preserveAspectRatio="none" aria-hidden="true"><path id="stepsPath" d="M0 20 C 120 0, 200 40, 333 20 S 540 0, 666 20 S 880 40, 1000 20"/></svg>
+          <article class="step" data-reveal style="--d:0s"><span class="num">01</span><h3>Profilini oluştur</h3><p>Kişisel bilgilerini, ölçülerini ve fotoğraflarını gir. Yaklaşık 8 dakika sürer.</p></article>
+          <article class="step" data-reveal style="--d:.12s"><span class="num">02</span><h3>Ekibimiz inceler</h3><p>Hüsrev Cast Ajans ekibi başvurunu değerlendirir. Onaylandığında yetenek havuzumuza girersin.</p></article>
+          <article class="step" data-reveal style="--d:.24s"><span class="num">03</span><h3>Castinge çağrılırsın</h3><p>Sana uygun bir iş geldiğinde seni arar, detayları paylaşırız.</p></article>
+          <article class="step" data-reveal style="--d:.36s"><span class="num">04</span><h3>Sete çık</h3><p>Müşteri seni seçerse iş kesinleşir ve çekim takvimine eklenirsin.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- İşler -->
+    <section class="sec" id="isler">
+      <div class="wrap">
+        <div class="sec-head" data-reveal>
+          <span class="eyebrow">Hangi işler?</span>
+          <h2>Bir profil, <em>birçok sahne</em>.</h2>
+        </div>
+        <div class="tiles">
+          <article class="tile" data-reveal data-spot style="--d:0s"><svg viewBox="0 0 24 24"><path d="M4 10h16v9a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><path d="M4 10l1.5-5.5 14.5 0L18.5 10M9.5 4.5 8 10M15 4.5 13.5 10"/></svg><h3>Reklam filmi</h3><p>Televizyon ve dijital kampanyalarda ana karakter ya da destek rol.</p></article>
+          <article class="tile" data-reveal data-spot style="--d:.08s"><svg viewBox="0 0 24 24"><path d="M12 8a2.2 2.2 0 1 1 2.2-2.2"/><path d="M12 8v1.2L3 16h18l-9-6.8"/><path d="M5 19h14"/></svg><h3>Katalog ve e-ticaret</h3><p>Moda ve ürün çekimleri; stüdyo ya da dış mekân.</p></article>
+          <article class="tile" data-reveal data-spot style="--d:.16s"><svg viewBox="0 0 24 24"><path d="M9.5 3h5l-1 4.5 4.5 13.5H6L10.5 7.5z"/><path d="M10.5 7.5h3"/></svg><h3>Defile</h3><p>Podyum yürüyüşü, sezon lansmanları ve moda haftaları.</p></article>
+          <article class="tile" data-reveal data-spot style="--d:.24s"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="12" height="10" rx="2"/><path d="M15 11l6-3v8l-6-3"/></svg><h3>Dizi ve sinema</h3><p>Konuk oyuncu, yardımcı rol ve kalabalık sahneler.</p></article>
+          <article class="tile" data-reveal data-spot style="--d:.32s"><svg viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg><h3>Klip</h3><p>Müzik videolarında sanatçıya eşlik eden roller.</p></article>
+          <article class="tile" data-reveal data-spot style="--d:.40s"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg><h3>Etkinlik ve lansman</h3><p>Fuar, açılış ve marka lansmanlarında karşılama ve tanıtım.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fotoğraf rehberi -->
+    <section class="sec" id="rehber">
+      <div class="wrap">
+        <div class="sec-head" data-reveal>
+          <span class="eyebrow">Fotoğraf rehberi</span>
+          <h2>Seni en iyi anlatan <em>dört kare</em>.</h2>
+          <p class="lead">Profesyonel çekim şart değil. Gün ışığında, filtresiz ve sade kıyafetle çekilmiş telefon fotoğrafları yeterli.</p>
+        </div>
+        <div class="frames">
+          <figure class="frame" data-reveal style="--d:0s"><div class="shot"><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i>
+            <svg viewBox="0 0 120 160"><ellipse cx="60" cy="64" rx="24" ry="30"/><path d="M50 92v12M70 92v12M18 158c4-30 22-46 42-46s38 16 42 46"/></svg></div>
+            <figcaption><b>Yüz</b><span>Işığa dön, makyaj hafif olsun</span></figcaption></figure>
+          <figure class="frame" data-reveal style="--d:.1s"><div class="shot"><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i>
+            <svg viewBox="0 0 120 160"><circle cx="60" cy="20" r="10"/><path d="M60 30v56M60 42 42 70M60 42l18 28M60 86l-11 64M60 86l11 64"/></svg></div>
+            <figcaption><b>Boy</b><span>Tam boy, sade ve dar kıyafet</span></figcaption></figure>
+          <figure class="frame" data-reveal style="--d:.2s"><div class="shot"><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i>
+            <svg viewBox="0 0 120 160"><path d="M72 30c-17 0-28 12-28 29 0 6 1 9-3 15l-6 9c-1 2 0 4 2 4h5c0 5 0 8 2 11 1 2 0 4 1 6 2 3 8 3 12 3v12"/><path d="M72 30c14 1 24 13 24 30 0 12-5 22-10 30v18"/><path d="M26 158c4-22 18-34 36-36 16 2 28 14 32 36"/></svg></div>
+            <figcaption><b>Profil</b><span>Yandan, saçlar yüzü kapatmasın</span></figcaption></figure>
+          <figure class="frame" data-reveal style="--d:.3s"><div class="shot"><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i>
+            <svg viewBox="0 0 120 160"><ellipse cx="60" cy="64" rx="24" ry="30"/><path d="M48 76q12 10 24 0"/><circle cx="51" cy="58" r="1.6"/><circle cx="69" cy="58" r="1.6"/><path d="M18 158c4-30 22-46 42-46s38 16 42 46"/></svg></div>
+            <figcaption><b>Doğal</b><span>Gülümse, filtre ve efekt yok</span></figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Güven bandı -->
+    <section class="trust" data-reveal>
+      <div class="wrap trust-in">
+        <div><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><b>Açık rıza ile</b><span>Bilgilerin yalnızca casting süreçlerinde, onayınla kullanılır.</span></div>
+        <div><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><b>İletişim bilgin gizli</b><span>Müşteriye giden aday paketinde telefonun ve e-postan yer almaz.</span></div>
+        <div><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.9-3.9L4 8M4 4v4h4M4 13a8 8 0 0 0 14.9 3.9L20 16M20 20v-4h-4"/></svg><b>Hep güncel</b><span>Saçını mı kestirdin, yeni fotoğraf mı çektirdin? Kartını kendin güncelle.</span></div>
+      </div>
+    </section>
+
+    <!-- SSS -->
+    <section class="sec" id="sss">
+      <div class="wrap narrow">
+        <div class="sec-head" data-reveal>
+          <span class="eyebrow">Sık sorulanlar</span>
+          <h2>Aklına takılanlar.</h2>
+        </div>
+        <div class="faq" data-reveal>
+          <details><summary>Başvurmak için deneyim gerekli mi?</summary><p>Hayır. Formda daha önce rol aldığın yapımları soruyoruz ama boş bırakabilirsin. Yeni yüzler de başvurabilir.</p></details>
+          <details><summary>Hangi bilgileri soruyorsunuz?</summary><p>Kişisel bilgilerin, boy, kilo, beden gibi ölçülerin, eğitimin, oyunculuk geçmişin ve bir rol için neleri kabul edebileceğin (saç kesimi, boya, gece çekimi gibi). Son olarak fotoğraflarını yüklersin.</p></details>
+          <details><summary>Başvurumun durumunu nereden görürüm?</summary><p>Başvuru sırasında bir şifre belirlersin. E-posta adresin ve şifrenle giriş yaparak başvurunun durumunu görebilirsin.</p></details>
+          <details><summary>Bilgilerimi sonradan değiştirebilir miyim?</summary><p>Evet. Giriş yaptıktan sonra “Bilgilerimi güncelle” ile ölçülerini, fotoğraflarını ve diğer cevaplarını istediğin zaman değiştirebilirsin.</p></details>
+          <details><summary>18 yaşından küçükler başvurabilir mi?</summary><p>18 yaşından küçük adaylar için veli ya da vasi onayı gerekir. Bu adım yakında forma eklenecek.</p></details>
+          <details><summary>Fotoğraflarım kimlerle paylaşılır?</summary><p>Fotoğrafların Hüsrev Cast Ajans ekibi tarafından görülür. Seni bir proje için önerdiğimizde, ilgili yapım şirketine giden aday paketinde yer alır.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kapanış -->
+    <section class="final" id="final">
+      <div class="final-rings" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="final-in" data-reveal>
+        <img class="final-mark yuz" src="img/ajans-yuz.jpg" alt="">
+        <h2>Sahne seni bekliyor.</h2>
+        <p>Profilini oluştur, gerisini bize bırak.</p>
+        <a class="btn-glow big" href="#/basvur"><span>Başvurumu başlat</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <div class="wrap foot-in">
+        <img src="img/ajans-yuz.jpg" alt="" class="foot-logo yuz">
+        <nav><a href="#/basvur">Başvur</a><a href="#/giris">Giriş yap</a><a href="#/" data-to="sss">SSS</a></nav>
+        <small>© 2026 Hüsrev Cast Ajans · Taslak sürüm — bu sayfa şimdilik yalnızca bu bilgisayarda çalışır.</small>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ================= ALT SAYFALAR (başvuru, giriş, başvurum) ================= -->
+  <main id="page" hidden></main>
+
+  <div id="toasts" aria-live="polite"></div>
+
+  <script src="../js/core.js?v=20260926c"></script>
+  <script src="../js/store.js?v=20260926c"></script>
+  <script src="../js/ui.js?v=20260926c"></script>
+  <script src="../js/form.js?v=20260926c"></script>
+  <script src="../js/dalga.js?v=20260926c"></script>
+  <script src="aday.js?v=20260926c"></script>
+</body>
+</html>

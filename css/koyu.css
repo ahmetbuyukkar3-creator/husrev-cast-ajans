@@ -1,0 +1,257 @@
+/* Hüsrev Cast Ajans paneli — koyu tema (K-013). Aday sitesiyle aynı dil: logonun siyahı + camgöbeği ışımalar.
+   Açık tema app.css'te; bu dosya yalnızca html[data-tema="koyu"] iken devreye girer. */
+html[data-tema="koyu"] {
+  color-scheme: dark;
+  --side: #000307;
+  --card: #0c1522;
+  --side-line: rgba(255, 255, 255, .07);
+  --side-text: #93a1b8;
+
+  --bg: #03060c;
+  --surface: #0c1522;
+  --surface-2: #111c2b;
+  --ink: #f2f6fb;
+  --ink-2: #c3cdda;
+  --muted: #8d99ad;
+  --line: rgba(255, 255, 255, .13);
+  --line-2: rgba(255, 255, 255, .08);
+
+  --blue: #1b8fe0;
+  --blue-2: #6fe9f7;
+  --blue-soft: rgba(19, 198, 220, .12);
+  --cyan: #13c6dc;
+  --cyan-soft: rgba(19, 198, 220, .10);
+  --green: #2fd18c;
+  --green-soft: rgba(47, 209, 140, .12);
+  --amber: #f3b545;
+  --amber-soft: rgba(243, 181, 69, .12);
+  --red: #ff6b78;
+  --red-soft: rgba(255, 107, 120, .12);
+  --indigo: #9aa3ff;
+  --indigo-soft: rgba(154, 163, 255, .13);
+
+  --sh: 0 1px 0 rgba(255, 255, 255, .04) inset, 0 18px 50px rgba(0, 0, 0, .45);
+  --sh-2: 0 1px 0 rgba(255, 255, 255, .06) inset, 0 24px 70px rgba(0, 0, 0, .6), 0 0 0 1px rgba(111, 233, 247, .12);
+  --grad: linear-gradient(100deg, #6fe9f7, #13c6dc 45%, #1b8fe0);
+  --display: 'Unbounded', 'Manrope', system-ui, sans-serif;
+}
+html[data-tema="koyu"] body { background: var(--bg); }
+html[data-tema="koyu"] ::selection { background: rgba(19, 198, 220, .35); color: #fff; }
+
+/* ---------- hareketli arka plan ---------- */
+.bg-fx { display: none; }
+html[data-tema="koyu"] .bg-fx { display: block; position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+html[data-tema="koyu"] .bg-fx .blob { position: absolute; width: 60vmax; height: 60vmax; border-radius: 50%; opacity: .28; }
+html[data-tema="koyu"] .bg-fx .b1 { background: radial-gradient(circle, rgba(19, 198, 220, .12), transparent 60%); left: -18vmax; top: -28vmax; animation: kDrift1 28s ease-in-out infinite alternate; }
+html[data-tema="koyu"] .bg-fx .b2 { background: radial-gradient(circle, rgba(10, 120, 194, .14), transparent 60%); right: -26vmax; top: 30vh; animation: kDrift2 34s ease-in-out infinite alternate; }
+html[data-tema="koyu"] .bg-fx .grid { display: none; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px); background-size: 64px 64px; -webkit-mask-image: radial-gradient(ellipse at 60% 0%, #000 10%, transparent 65%); mask-image: radial-gradient(ellipse at 60% 0%, #000 10%, transparent 65%); }
+@keyframes kDrift1 { to { transform: translate(10vw, 12vh) scale(1.1); } }
+@keyframes kDrift2 { to { transform: translate(-10vw, -10vh) scale(.92); } }
+html[data-tema="koyu"] #app { position: relative; z-index: 1; }
+
+/* ---------- tipografi ---------- */
+html[data-tema="koyu"] .top h1,
+html[data-tema="koyu"] .hello h2,
+html[data-tema="koyu"] .phead h2,
+html[data-tema="koyu"] .login-box h1,
+html[data-tema="koyu"] .p-side h2,
+html[data-tema="koyu"] .stat b,
+html[data-tema="koyu"] .list-head h3,
+html[data-tema="koyu"] .cal-head h3,
+html[data-tema="koyu"] .form-head h2,
+html[data-tema="koyu"] .cl-band h1,
+html[data-tema="koyu"] .cl-t-head h3 { font-family: var(--display); font-weight: 500; letter-spacing: -.02em; }
+html[data-tema="koyu"] .top h1 { font-size: 17px; }
+html[data-tema="koyu"] .hello h2 { font-size: 30px; }
+html[data-tema="koyu"] .hello h2 span, html[data-tema="koyu"] .grad { background: linear-gradient(100deg, #6fe9f7, #13c6dc 40%, #1b8fe0 80%, #6fe9f7); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: kShine 6s linear infinite; }
+@keyframes kShine { to { background-position: -200% 0; } }
+html[data-tema="koyu"] .kicker { color: var(--cyan); }
+html[data-tema="koyu"] .link, html[data-tema="koyu"] .note a, html[data-tema="koyu"] .ag-body a, html[data-tema="koyu"] .login-alt, html[data-tema="koyu"] .video-row a, html[data-tema="koyu"] .cl-video { color: var(--blue-2); }
+
+/* ---------- kabuk ---------- */
+html[data-tema="koyu"] .side { background: #000307; border-right: 1px solid rgba(255,255,255,.1); }
+html[data-tema="koyu"] .side::before { background: radial-gradient(420px 300px at -60px -60px, rgba(19, 198, 220, .20), transparent 70%); }
+html[data-tema="koyu"] .nav-item.on { background: linear-gradient(90deg, rgba(19, 198, 220, .18), rgba(10, 120, 194, .05)); box-shadow: inset 0 0 0 1px rgba(111, 233, 247, .12); }
+html[data-tema="koyu"] .top { background: rgba(3, 6, 12, .94); backdrop-filter: blur(8px); border-bottom-color: var(--line); }
+html[data-tema="koyu"] .crumb { color: var(--muted); }
+html[data-tema="koyu"] .crumb-sep { color: #33405a; }
+html[data-tema="koyu"] .icon-btn:hover { background: rgba(255,255,255,.06); color: #fff; }
+
+/* ---------- butonlar ---------- */
+html[data-tema="koyu"] .btn-primary { background: var(--grad); background-size: 180% 100%; color: #001018; box-shadow: 0 0 0 1px rgba(111, 233, 247, .35), 0 8px 30px rgba(19, 198, 220, .28), inset 0 1px 0 rgba(255,255,255,.45); transition: transform .25s, box-shadow .25s, background-position .6s; }
+html[data-tema="koyu"] .btn-primary:hover { color: #001018; background-position: 100% 0; transform: translateY(-1px); box-shadow: 0 0 0 1px rgba(111, 233, 247, .55), 0 12px 40px rgba(19, 198, 220, .45), inset 0 1px 0 rgba(255,255,255,.45); }
+html[data-tema="koyu"] .btn-ghost { background: var(--card); border-color: var(--line); color: var(--ink); }
+html[data-tema="koyu"] .btn-ghost:hover { background: rgba(19,198,220,.07); border-color: rgba(111, 233, 247, .45); color: #fff; }
+html[data-tema="koyu"] .btn-light { background: rgba(19, 198, 220, .12); color: var(--blue-2); }
+html[data-tema="koyu"] .btn-light:hover { background: rgba(19, 198, 220, .2); color: #fff; }
+html[data-tema="koyu"] .btn-green { background: var(--green); color: #00150b; box-shadow: 0 6px 22px rgba(47, 209, 140, .3); }
+html[data-tema="koyu"] .btn-red { color: #1a0004; }
+
+/* ---------- kartlar, rozetler ---------- */
+html[data-tema="koyu"] .card,
+html[data-tema="koyu"] .stat,
+html[data-tema="koyu"] .tcard,
+html[data-tema="koyu"] .role-card,
+html[data-tema="koyu"] .mini-t,
+html[data-tema="koyu"] .form-card { background: var(--card); border-color: var(--line); backdrop-filter: none; box-shadow: 0 1px 0 rgba(255,255,255,.05) inset, 0 12px 32px rgba(0,0,0,.35); }
+html[data-tema="koyu"] .tcard:hover, html[data-tema="koyu"] .stat:hover, html[data-tema="koyu"] .mini-t:hover { border-color: rgba(111, 233, 247, .35); box-shadow: var(--sh-2); }
+html[data-tema="koyu"] .tcard.sel { background: linear-gradient(170deg, #0f2a24, var(--card) 60%); border-color: var(--green); box-shadow: 0 0 0 1px var(--green), 0 0 30px rgba(47, 209, 140, .18); }
+html[data-tema="koyu"] .tc-check { background: rgba(0,0,0,.4); border-color: var(--line); }
+html[data-tema="koyu"] .avatar img { box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px rgba(111, 233, 247, .35); }
+html[data-tema="koyu"] .dot { border-color: var(--bg); }
+html[data-tema="koyu"] .stat-ic { background: rgba(19,198,220,.12) !important; color: var(--cyan) !important; box-shadow: 0 0 20px rgba(19,198,220,.2); }
+html[data-tema="koyu"] .stat { position: relative; overflow: hidden; }
+html[data-tema="koyu"] .stat::after { content: ''; position: absolute; right: -40px; top: -40px; width: 140px; height: 140px; border-radius: 50%; border: 1px solid rgba(111, 233, 247, .12); box-shadow: 0 0 0 18px rgba(19,198,220,.025); }
+html[data-tema="koyu"] .b-blue { color: var(--blue-2); }
+html[data-tema="koyu"] .b-green { color: var(--green); }
+html[data-tema="koyu"] .b-gray { background: rgba(255,255,255,.07); color: var(--ink-2); }
+html[data-tema="koyu"] .chip { background: rgba(255,255,255,.09); color: var(--ink); }
+html[data-tema="koyu"] .chip-soft { background: rgba(19, 198, 220, .16); color: #b4f4fb; }
+html[data-tema="koyu"] .note-blue { background: rgba(19, 198, 220, .08); color: #bfeff6; border: 1px solid rgba(19, 198, 220, .18); }
+html[data-tema="koyu"] .note-amber { background: rgba(243, 181, 69, .08); color: #f7d38f; border: 1px solid rgba(243, 181, 69, .2); }
+html[data-tema="koyu"] .client-note { background: rgba(19, 198, 220, .1); color: #bfeff6; }
+html[data-tema="koyu"] .form-err { background: rgba(255,107,120,.1); color: #ffb3ba; border: 1px solid rgba(255,107,120,.25); }
+html[data-tema="koyu"] .ro-pill { background: rgba(243, 181, 69, .12); }
+html[data-tema="koyu"] .empty .ic { color: #33405a; }
+html[data-tema="koyu"] .tri { background: rgba(255,255,255,.07); }
+
+/* ---------- form öğeleri ---------- */
+html[data-tema="koyu"] select, html[data-tema="koyu"] input[type=text], html[data-tema="koyu"] input[type=number], html[data-tema="koyu"] input[type=email],
+html[data-tema="koyu"] input[type=tel], html[data-tema="koyu"] input[type=url], html[data-tema="koyu"] input[type=date], html[data-tema="koyu"] input[type=time],
+html[data-tema="koyu"] input[type=password], html[data-tema="koyu"] input:not([type]), html[data-tema="koyu"] textarea { background-color: #060c16; border-color: rgba(255,255,255,.14); color: var(--ink); }
+html[data-tema="koyu"] select option { background: #07111d; color: #fff; }
+html[data-tema="koyu"] select, html[data-tema="koyu"] input, html[data-tema="koyu"] textarea { transition: border-color .2s, box-shadow .2s; }
+html[data-tema="koyu"] select:focus, html[data-tema="koyu"] input:focus, html[data-tema="koyu"] textarea:focus { border-color: var(--cyan); box-shadow: 0 0 0 4px rgba(19, 198, 220, .14); background-color: rgba(19, 198, 220, .05); }
+html[data-tema="koyu"] input::placeholder, html[data-tema="koyu"] textarea::placeholder { color: #4d5b72; }
+html[data-tema="koyu"] select:disabled, html[data-tema="koyu"] input:disabled, html[data-tema="koyu"] textarea:disabled { background-color: rgba(255,255,255,.03); color: var(--ink-2); }
+html[data-tema="koyu"] .filters .search input { background: #060c16; }
+html[data-tema="koyu"] .filters .search input:focus { background: rgba(19,198,220,.05); box-shadow: 0 0 0 4px rgba(19,198,220,.14); }
+html[data-tema="koyu"] .pick { background: rgba(255,255,255,.03); border-color: var(--line); color: var(--ink-2); }
+html[data-tema="koyu"] .pick.on { background: var(--grad); border-color: transparent; color: #001018; box-shadow: 0 6px 20px rgba(19,198,220,.3); }
+html[data-tema="koyu"] .seg { background: rgba(0,0,0,.4); border: 1px solid var(--line); }
+html[data-tema="koyu"] .seg-b.on[data-v="Evet"] { color: #00150b; }
+html[data-tema="koyu"] .seg-b.on[data-v="Hayır"] { color: #1a0004; }
+html[data-tema="koyu"] .seg-b.on[data-v="Görüşülür"] { background: var(--amber); color: #1a1000; }
+html[data-tema="koyu"] .consent { border-color: var(--line); }
+html[data-tema="koyu"] .consent-main, html[data-tema="koyu"] .checks, html[data-tema="koyu"] .crit-note, html[data-tema="koyu"] .video-row { background: rgba(255,255,255,.03); }
+html[data-tema="koyu"] .ph-add { background: rgba(19,198,220,.04); border-color: rgba(111,233,247,.3); color: var(--blue-2); }
+html[data-tema="koyu"] .stepper li::before { background: rgba(255,255,255,.1); }
+html[data-tema="koyu"] .stepper li.cur::before { background: var(--grad); box-shadow: 0 0 12px rgba(19,198,220,.6); }
+html[data-tema="koyu"] .stepper li.done::before { background: var(--cyan); }
+html[data-tema="koyu"] .form-head small { color: var(--cyan); }
+
+/* ---------- sekmeler, tablo, durum ---------- */
+html[data-tema="koyu"] .tab { background: var(--card); border-color: var(--line); color: var(--ink-2); }
+html[data-tema="koyu"] .tab em { background: rgba(255,255,255,.07); }
+html[data-tema="koyu"] .tab.on { background: var(--grad); border-color: transparent; color: #001018; }
+html[data-tema="koyu"] .tab.on em { background: rgba(0,0,0,.18); color: #001018; }
+html[data-tema="koyu"] .tabs-line .tab, html[data-tema="koyu"] .tabs-line .tab.on { background: none; color: var(--muted); }
+html[data-tema="koyu"] .tabs-line .tab.on { color: #fff; }
+html[data-tema="koyu"] .tabs-line .tab.on::after { box-shadow: 0 0 12px var(--cyan); }
+html[data-tema="koyu"] a.pt-row:hover, html[data-tema="koyu"] a.row:hover { background: rgba(19,198,220,.05); }
+html[data-tema="koyu"] .sf-step { background: var(--surface-2); border-color: var(--line); color: var(--ink-2); }
+html[data-tema="koyu"] .sf-step.on { color: #001018 !important; box-shadow: 0 0 20px rgba(255,255,255,.08); }
+html[data-tema="koyu"] .phead { background: linear-gradient(120deg, #0d2433, #0c1826 55%, var(--card)); border: 1px solid rgba(111, 233, 247, .22); }
+html[data-tema="koyu"] .perm-row.draft { background: linear-gradient(90deg, rgba(255,107,120,.1), transparent 70%); }
+html[data-tema="koyu"] .q-new { background: linear-gradient(90deg, rgba(154,163,255,.12), transparent 70%); }
+html[data-tema="koyu"] .step-n { background: var(--grad); color: #001018; }
+html[data-tema="koyu"] .as-code { background: rgba(243, 181, 69, .12); }
+html[data-tema="koyu"] .client-logo { background: rgba(19,198,220,.12); box-shadow: inset 0 0 0 1px rgba(111,233,247,.25); }
+
+/* ---------- profil ---------- */
+html[data-tema="koyu"] .p-side { background: linear-gradient(180deg, #0d2130, var(--card) 45%); border: 1px solid rgba(111, 233, 247, .22); }
+html[data-tema="koyu"] .p-photo img { box-shadow: 0 0 0 4px var(--bg), 0 0 0 6px rgba(19,198,220,.55), 0 0 40px rgba(19,198,220,.35); }
+html[data-tema="koyu"] .p-photo::after { content: ''; position: absolute; inset: -12px; border-radius: 50%; border: 1px dashed rgba(111,233,247,.35); animation: kSpin 22s linear infinite; }
+@keyframes kSpin { to { transform: rotate(360deg); } }
+html[data-tema="koyu"] .media-grid figure { background: rgba(255,255,255,.04); }
+
+/* ---------- takvim ---------- */
+html[data-tema="koyu"] .cal-grid { border-color: var(--line); }
+html[data-tema="koyu"] .cal-dow { background: var(--surface-2); border-color: var(--line); }
+html[data-tema="koyu"] .cal-cell { border-color: var(--line-2); }
+html[data-tema="koyu"] .cal-cell.off { background: repeating-linear-gradient(135deg, rgba(255,255,255,.015) 0 6px, transparent 6px 12px); }
+html[data-tema="koyu"] .cal-cell.today .cal-n { background: var(--grad); color: #001018; box-shadow: 0 0 14px rgba(19,198,220,.6); }
+html[data-tema="koyu"] .ev-green { background: rgba(47,209,140,.12); color: #8ff0c2; }
+html[data-tema="koyu"] .ev-indigo { background: rgba(154,163,255,.13); color: #c3c8ff; }
+html[data-tema="koyu"] .ev-blue { background: rgba(19,198,220,.12); color: #a8f1fa; }
+html[data-tema="koyu"] .ev-amber { background: rgba(243,181,69,.12); color: #f7d38f; }
+html[data-tema="koyu"] .ag-date { background: var(--surface-2); border-color: var(--line); }
+html[data-tema="koyu"] .ag-people img, html[data-tema="koyu"] .sel-faces img { border-color: var(--bg); }
+
+/* ---------- modal, bildirim, seçim çubuğu ---------- */
+html[data-tema="koyu"] .modal-wrap { background: rgba(0, 3, 7, .7); backdrop-filter: blur(6px); }
+html[data-tema="koyu"] .modal { background: #07101c; border: 1px solid rgba(111, 233, 247, .18); box-shadow: 0 40px 120px rgba(0,0,0,.7), 0 0 60px rgba(19,198,220,.08); }
+html[data-tema="koyu"] .pick-row { border-color: var(--line); }
+html[data-tema="koyu"] .pick-row:has(input:checked) { border-color: var(--cyan); background: rgba(19,198,220,.08); }
+html[data-tema="koyu"] .pk-face img { box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--line); }
+html[data-tema="koyu"] .pk-face.yes img { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--green), 0 0 16px rgba(47,209,140,.4); }
+html[data-tema="koyu"] .pk-face.no img { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--red); }
+html[data-tema="koyu"] .pk-face i { border-color: var(--bg); }
+html[data-tema="koyu"] .linkbox input { background: rgba(0,0,0,.4); }
+html[data-tema="koyu"] .selbar { background: rgba(7, 16, 28, .92); border: 1px solid rgba(111, 233, 247, .25); backdrop-filter: blur(12px); box-shadow: 0 20px 60px rgba(0,0,0,.6), 0 0 40px rgba(19,198,220,.12); }
+html[data-tema="koyu"] .toast { background: rgba(7, 16, 28, .94); border: 1px solid rgba(111, 233, 247, .3); backdrop-filter: blur(10px); }
+
+/* ---------- giriş ekranı ---------- */
+html[data-tema="koyu"] .login { background: transparent; }
+html[data-tema="koyu"] .login-art { background: transparent; border-right: 1px solid var(--line); }
+html[data-tema="koyu"] .login-orb { display: none; }
+.login-art { justify-content: flex-start; }
+.login-art .login-logo { width: min(360px, 80%); }
+.login-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.login-art > *:not(.login-canvas) { position: relative; z-index: 1; }
+html[data-tema="koyu"] .role-card:hover { border-color: rgba(111, 233, 247, .5); box-shadow: 0 0 0 4px rgba(19,198,220,.1), 0 10px 30px rgba(0,0,0,.4); }
+
+/* ---------- müşteri paket sayfası ---------- */
+html[data-tema="koyu"] body.pub { background: var(--bg); }
+html[data-tema="koyu"] .pk-brand { border-color: var(--line); }
+html[data-tema="koyu"] .cl-band { background: linear-gradient(120deg, #0d2433, var(--card)); border-color: var(--line); }
+html[data-tema="koyu"] .cl-t { border-color: var(--line); }
+html[data-tema="koyu"] .cl-foot { background: rgba(0, 3, 7, .85); backdrop-filter: blur(12px); border-color: var(--line); }
+html[data-tema="koyu"] .cl-count { color: var(--green); }
+
+/* ---------- tema düğmesi ---------- */
+.tema-btn { display: flex; align-items: center; gap: 8px; width: 100%; padding: 8px 12px; margin-bottom: 8px; border-radius: 10px; border: 1px solid var(--side-line); background: transparent; color: var(--side-text); font-size: 12.5px; font-weight: 700; cursor: pointer; }
+.tema-btn:hover { color: #fff; background: rgba(255,255,255,.05); }
+.tema-btn .tb-sw { margin-left: auto; width: 30px; height: 16px; border-radius: 999px; background: rgba(255,255,255,.12); position: relative; }
+.tema-btn .tb-sw::after { content: ''; position: absolute; left: 2px; top: 2px; width: 12px; height: 12px; border-radius: 50%; background: #fff; transition: transform .2s; }
+html[data-tema="koyu"] .tema-btn .tb-sw { background: var(--cyan); box-shadow: 0 0 10px rgba(19,198,220,.6); }
+html[data-tema="koyu"] .tema-btn .tb-sw::after { transform: translateX(14px); }
+
+/* ---------- açılış animasyonları (her iki tema) ---------- */
+.content > * { animation: kIn .6s cubic-bezier(.2, .8, .2, 1) both; }
+.content > *:nth-child(2) { animation-delay: .06s; }
+.content > *:nth-child(3) { animation-delay: .12s; }
+.content > *:nth-child(4) { animation-delay: .18s; }
+.content > *:nth-child(n+5) { animation-delay: .24s; }
+.tgrid > .tcard { animation: kIn .55s cubic-bezier(.2, .8, .2, 1) both; }
+.tgrid > .tcard:nth-child(2) { animation-delay: .04s; } .tgrid > .tcard:nth-child(3) { animation-delay: .08s; }
+.tgrid > .tcard:nth-child(4) { animation-delay: .12s; } .tgrid > .tcard:nth-child(5) { animation-delay: .16s; }
+.tgrid > .tcard:nth-child(n+6) { animation-delay: .2s; }
+@keyframes kIn { from { opacity: 0; transform: translateY(14px); } }
+@media (prefers-reduced-motion: reduce) {
+  .content > *, .tgrid > .tcard, .bg-fx .blob, .p-photo::after { animation: none !important; }
+}
+
+/* netlik: yarı saydamlık yerine düz yüzeyler, belirgin sınırlar */
+html[data-tema="koyu"] .card, html[data-tema="koyu"] .stat, html[data-tema="koyu"] .tcard, html[data-tema="koyu"] .role-card, html[data-tema="koyu"] .mini-t { background: var(--card); }
+html[data-tema="koyu"] .tc-meas, html[data-tema="koyu"] .tc-actions { border-color: rgba(255,255,255,.1); }
+html[data-tema="koyu"] .tc-meas dt, html[data-tema="koyu"] .attrs dt, html[data-tema="koyu"] .pt-head, html[data-tema="koyu"] .fgrid label { color: #9aa6b9; }
+html[data-tema="koyu"] .row, html[data-tema="koyu"] .pt-row { border-color: rgba(255,255,255,.08); }
+html[data-tema="koyu"] .content { position: relative; }
+
+/* Giriş sol panel: ajans görseli + su dalgası (js/dalga.js) */
+.login-art.login-gorsel { justify-content: flex-end; background: #0b1a1c; cursor: crosshair; }
+.login-gorsel .login-canvas { image-rendering: auto; }
+.login-art > .login-karart { position: absolute; z-index: 0; inset: 0; background: linear-gradient(180deg, rgba(0,3,7,0) 55%, rgba(0,3,7,.78) 100%); pointer-events: none; }
+.login-gorsel .login-tag { color: #e6eef5; text-shadow: 0 2px 10px rgba(0,0,0,.5); margin: 0; }
+.login-gorsel .login-orb { display: none; }
+
+/* Sol menü: logo yerine ajans görseli + su dalgası */
+.brand.brand-gorsel { padding: 14px 14px 14px; }
+.brand-gorsel canvas { display: block; width: 100%; height: 150px; border-radius: 14px; box-shadow: 0 0 0 1px rgba(111,233,247,.18), 0 10px 30px rgba(0,0,0,.35); }
+
+/* Eski logo yerleri: yuvarlak ajans görseli + isim */
+.yuz-logo { border-radius: 50%; object-fit: cover; aspect-ratio: 1; box-shadow: 0 0 0 2px rgba(111,233,247,.35), 0 0 24px rgba(19,198,220,.3); }
+img.reg-logo.yuz-logo { width: 72px; height: 72px; }
+.pk-marka { display: inline-flex; align-items: center; gap: 12px; font-size: 20px; font-weight: 800; }
+.pk-marka .yuz-logo { width: 48px; height: 48px; }
