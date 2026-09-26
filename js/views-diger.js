@@ -231,7 +231,7 @@
     ['B-6h', 'Aday sitesi "manken" odaklı tanıtılıyor ama formda oyuncu / figüran da seçilebiliyor.'],
     ['B-6d', 'Ajans da aynı formla elle yetenek ekleyebilir; bu kayıt doğrudan havuza girer.'],
     ['B-6e', 'Kayıt soruları taslak bir listedir; ajansın onayına sunulacak.'],
-    ['B-6f', 'Aday sitesi de şimdilik sadece bu bilgisayarda (localhost) açılır; gerçek adaylar ancak site yayına alınınca başvurabilir.'],
+    ['B-6f', 'Demo sürümde başvurular yalnızca başvuranın tarayıcısında saklanır; ajans paneline düşmesi için gerçek sunucu (veritabanı) gerekir.'],
     ['B-10', 'Müsaitlik: adayın beyan ettiği genel müsaitlik + ajansın tuttuğu Müsait / Meşgul / Pasif durumu.'],
     ['B-13', 'Fotoğraflar yüklenir (en fazla 6), video link olarak girilir.'],
     ['D-18', 'Müşteriler (yapım şirketleri) ayrı bir liste olarak tutulur.'],

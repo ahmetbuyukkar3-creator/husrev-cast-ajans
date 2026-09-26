@@ -63,7 +63,7 @@
       baslik: 'Paket hazır', alt: false,
       govde: '<p>Bu linki müşteriye WhatsApp veya e-posta ile gönderin. Müşteri giriş yapmadan adayları inceleyip seçim yapabilir.</p>' +
         '<div class="linkbox"><input readonly value="' + esc(url) + '"><button class="btn btn-primary btn-s" id="kopyala">' + icon('copy', 15) + ' Kopyala</button></div>' +
-        '<div class="note note-amber">' + icon('info', 16) + '<span>Taslak localhost\'ta çalıştığı için bu link sadece bu bilgisayarda açılır (E-27).</span></div>' +
+        '<div class="note note-amber">' + icon('info', 16) + '<span>Demo sürümde veriler bu tarayıcıda tutulur; link başka bir cihazda açılırsa adaylar görünmez (E-27).</span></div>' +
         '<div class="right gap"><a class="btn btn-ghost" href="#/paketler" data-kapat>Paketlere git</a><a class="btn btn-light" href="' + esc(url) + '" target="_blank" rel="noopener">' + icon('eye', 15) + ' Müşteri gibi aç</a></div>',
       onMount: function (b, close) {
         b.querySelector('#kopyala').onclick = function () { C.copy(url); };

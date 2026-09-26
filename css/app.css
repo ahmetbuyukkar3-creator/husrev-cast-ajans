@@ -39,6 +39,9 @@
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html, body { margin: 0; }
+/* Telefonda arka plan ışık lekeleri sayfayı yana genişletmesin */
+html, body { overflow-x: hidden; }
+@supports (overflow: clip) { html, body { overflow-x: clip; } }
 body { font-family: var(--font); font-size: 14px; line-height: 1.5; color: var(--ink); background: var(--bg); -webkit-font-smoothing: antialiased; }
 a { color: var(--blue); text-decoration: none; }
 a:hover { color: var(--blue-2); }
@@ -129,6 +132,7 @@ code { background: var(--line-2); padding: 1px 6px; border-radius: 6px; font-siz
 .card-head h3 { font-size: 15px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
 .link { font-weight: 700; font-size: 12.5px; display: inline-flex; align-items: center; gap: 4px; }
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.grid-2 > * { min-width: 0; } /* uzun proje adları kartı ekrandan taşırmasın */
 .grid-2 > .card { margin-bottom: 18px; }
 
 .note { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-radius: 12px; margin-bottom: 18px; font-size: 13px; }
